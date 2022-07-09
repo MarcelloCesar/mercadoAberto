@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mercadoaberto/componentes/header_bar.dart';
+import 'package:mercadoaberto/constantes/estilo_texto.dart';
 import 'package:mercadoaberto/constantes/paleta_cores.dart';
 
 class HomePage extends StatefulWidget {
@@ -9,92 +11,152 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final double appBarIconSize = 32;
-  final double iconGpsSize = 22;
-  final double spaceBewteenIcons = 6;
-  final double paddingTopAppbar = 10;
-  final double paddingLeftAppBar = 5;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 86,
-        elevation: 0,
-        backgroundColor: PaletaCores.amareloHeader1(),
-        leading: Container(
-          padding: EdgeInsets.only(top: paddingTopAppbar),
-          child: Icon(
-            Icons.menu,
-            color: Colors.black,
-            size: appBarIconSize,
-          ),
-        ),
-        actions: [
-          Container(
-            width: MediaQuery.of(context).size.width -
-                (2 * appBarIconSize) -
-                (8 * spaceBewteenIcons),
-            padding: EdgeInsets.only(top: paddingTopAppbar),
-            child: TextField(
-              decoration: InputDecoration(
-                isDense: true,
-                contentPadding: const EdgeInsets.only(top: 5),
-                filled: true,
-                fillColor: Colors.white,
-                hintText: "Buscar no Mercado Aberto",
-                prefixIcon: const Icon(Icons.search),
-                border: _returnBorder(),
-                focusedBorder: _returnBorder(),
-                enabledBorder: _returnBorder(),
-              ),
-            ),
-          ),
-          Padding(padding: EdgeInsets.all(spaceBewteenIcons)),
-          Container(
-            padding: EdgeInsets.only(top: paddingTopAppbar),
-            child: Icon(
-              Icons.shopping_cart_outlined,
-              color: Colors.black,
-              size: appBarIconSize,
-            ),
-          ),
-          Padding(padding: EdgeInsets.all(spaceBewteenIcons)),
-        ],
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(4.0),
-          child: Container(
-              color: PaletaCores.amareloHeader1(),
-              height: 40.0,
-              child: Row(
-                children: [
-                  Padding(padding: EdgeInsets.all(paddingLeftAppBar)),
-                  Icon(
-                    Icons.pin_drop_outlined,
-                    size: iconGpsSize,
-                  ),
-                  Padding(padding: EdgeInsets.all(paddingLeftAppBar)),
-                  const Text(
-                      "Enviar para Marcello Queiroz - Rua Jardim Paulista, 56"),
-                ],
-              )),
-        ),
-      ),
+      appBar: HeaderBar.recuperaBarraMenu(context),
       drawer: Drawer(
         backgroundColor: PaletaCores.amareloHeader1(),
+      ),
+      backgroundColor: PaletaCores.fundoCinza1(),
+      body: Container(
+        padding: const EdgeInsets.only(
+          left: 15,
+          right: 15,
+        ),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: const FractionalOffset(0.5, 0.2),
+            colors: [
+              PaletaCores.amareloHeader1(),
+              PaletaCores.fundoCinza1(),
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(3),
+              height: 200,
+              child: PageView.builder(
+                itemCount: 2,
+                pageSnapping: true,
+                itemBuilder: (context, pagePosition) {
+                  return Container(
+                    margin: const EdgeInsets.all(10),
+                    child: Image.asset('assets/promo1.png'),
+                  );
+                },
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [
+                      PaletaCores.roxoAssinatura1(),
+                      PaletaCores.azulAssinatura1()
+                    ]),
+                boxShadow: _retornaBoxShadow(),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text(
+                    "Assine o nível 6 por R\$ 9,90/mês!",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  Icon(
+                    Icons.chevron_right,
+                    color: Colors.white,
+                  )
+                ],
+              ),
+            ),
+            const Padding(padding: EdgeInsets.all(5)),
+            Container(
+              padding: const EdgeInsets.only(
+                top: 5,
+                bottom: 5,
+              ),
+              decoration: BoxDecoration(
+                boxShadow: _retornaBoxShadow(),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.local_shipping_outlined,
+                    color: PaletaCores.verdeFreteGratis1(),
+                  ),
+                  Text(
+                    " Frete Grátis",
+                    style: EstiloTexto.textoFreteGratis1(),
+                  ),
+                  Text(
+                    " em milhões de produtos a partir de RS79",
+                    style: EstiloTexto.textoEscritaPreto1(),
+                  ),
+                ],
+              ),
+            ),
+            const Padding(padding: EdgeInsets.all(10)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _retornaBotao('Recarregar', Icons.phone_iphone, false),
+                _retornaBotao('Ofertas', Icons.sell, true),
+                _retornaBotao('Mercado', Icons.shopping_basket_outlined, false),
+                _retornaBotao('Veículos', Icons.directions_car_outlined, false),
+                _retornaBotao('Ver Mais', Icons.add, false),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
 
-  OutlineInputBorder _returnBorder() {
-    return OutlineInputBorder(
-      borderSide: BorderSide(
-        color: PaletaCores.amareloHeader1(),
-        width: 0,
+  List<BoxShadow> _retornaBoxShadow() {
+    return [
+      BoxShadow(
+        color: Colors.grey.withOpacity(0.4),
+        spreadRadius: 0.5,
+        blurRadius: 2,
+        offset: const Offset(0, 1.5),
       ),
-      borderRadius: const BorderRadius.all(
-        Radius.circular(30.0),
+    ];
+  }
+
+  Widget _retornaBotao(String Titulo, icone, bool selected) {
+    return Column(children: [
+      Container(
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(100),
+          boxShadow: _retornaBoxShadow(),
+        ),
+        child: Icon(
+          icone,
+          size: 30,
+          color: selected ? Colors.blue : PaletaCores.cinzaEscuroIcones(),
+        ),
       ),
-    );
+      const Padding(padding: EdgeInsets.all(4)),
+      Text(
+        Titulo,
+        style: TextStyle(
+          color: selected ? Colors.blue : PaletaCores.cinzaEscuroIcones(),
+          fontSize: 12,
+        ),
+      ),
+    ]);
   }
 }

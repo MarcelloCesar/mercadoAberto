@@ -49,7 +49,7 @@ class _MeuAppBarState extends State<MeuAppBar> {
         ),
         Padding(padding: EdgeInsets.all(spaceBewteenIcons)),
       ],
-      bottom: BarraEnviarPara(),
+      bottom: const BarraEnviarPara(),
     );
   }
 }

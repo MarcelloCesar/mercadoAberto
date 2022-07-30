@@ -58,30 +58,19 @@ class _HomePageState extends State<HomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
-                BotaoCircular(
-                  titulo: 'Recarregar',
-                  icone: Icons.phone_iphone,
-                  selected: false,
-                ),
-                BotaoCircular(
-                  titulo: 'Ofertas',
-                  icone: Icons.sell,
-                  selected: true,
-                ),
+                BotaoCircular(titulo: 'Recarregar', icone: Icons.phone_iphone),
+                BotaoCircular(titulo: 'Ofertas', icone: Icons.sell),
                 BotaoCircular(
                   titulo: 'Mercado',
                   icone: Icons.shopping_basket_outlined,
-                  selected: false,
                 ),
                 BotaoCircular(
                   titulo: 'Veículos',
                   icone: Icons.directions_car_outlined,
-                  selected: false,
                 ),
                 BotaoCircular(
                   titulo: 'Ver Mais',
                   icone: Icons.add,
-                  selected: false,
                 ),
               ],
             )

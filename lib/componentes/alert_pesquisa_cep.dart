@@ -32,8 +32,8 @@ class AlertPesquisarCep extends StatelessWidget {
 
   void atualizaEndereco() async {
     String novoEndereco = await _pesquisaCepOnline(_campoCep.text);
-    String novoTexto = "Enviar para " + _campoCep.text + " - " + novoEndereco;
-
+    //String novoTexto = "Enviar para " + _campoCep.text + " - " + novoEndereco;
+    String novoTexto = "Enviar para ${_campoCep.text} - $novoEndereco";
     callback(novoTexto);
   }
 

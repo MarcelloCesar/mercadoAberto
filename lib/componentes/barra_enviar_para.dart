@@ -13,7 +13,7 @@ class BarraEnviarPara extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _BarraEnviarParaState extends State<BarraEnviarPara> {
-  String textoEnviarPara = "Enviar para 17525-901 - Rua Jardim Paulista, 56";
+  String textoEnviarPara = "Enviar para 17525901";
 
   @override
   Widget build(BuildContext context) {

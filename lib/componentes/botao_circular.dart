@@ -12,7 +12,7 @@ class BotaoCircular extends StatefulWidget {
   @override
   State<BotaoCircular> createState() => _BotaoCircularState();
 }
-j
+
 class _BotaoCircularState extends State<BotaoCircular> {
   bool selected = false;
 
